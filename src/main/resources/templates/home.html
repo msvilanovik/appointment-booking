@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <meta charset="UTF-8">
+    <title>Fitpoint App - Reserve your training</title>
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Flaticon Font -->
+    <link href="/lib/flaticon/font/flaticon.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/css/style.min.css" rel="stylesheet">
+
+</head>
+<header>
+    <!-- Navbar Start -->
+    <div class="container-fluid p-0 nav-bar">
+        <nav class="navbar navbar-expand-lg bg-none navbar-dark py-3">
+            <a href="" class="navbar-brand">
+                <h1 class="m-0 display-4 font-weight-bold text-uppercase text-white">Fitpoint App</h1>
+            </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto p-4 bg-secondary">
+                    <a href="/" class="nav-item nav-link">Home</a>
+                    <a href="/fitness-centers" class="nav-item nav-link">Fitness Centers</a>
+                    <a href="/book" class="nav-item nav-link">Book an Appointment</a>
+                    <a href="/about" class="nav-item nav-link">About Us</a>
+                </div>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <th:block sec:authorize="isAnonymous()">
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-outline-light btn-lg" aria-current="page" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-outline-light btn-lg" aria-current="page" href="/register">Register</a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-outline-light btn-lg" aria-current="page" href="/admin">Admin Panel</a>
+                        </li>
+                    </th:block>
+                    <th:block sec:authorize="!isAnonymous()">
+                        <li class="nav-item active">
+                            <a class="nav-link btn btn-outline-light btn-lg" aria-current="page" href="/logout">Logout</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+    <!-- Navbar
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarExample01"
+                    aria-controls="navbarExample01"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="align-content-left"><h1>FitPoint App</h1></div>
+            <div class="collapse navbar-collapse align-content-center justify-content-center" style="padding-left: 20%;" id="navbarExample01 ">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/fitness-centers">Fitness Centers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/book">Book an appointment</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <th:block sec:authorize="isAnonymous()">
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/login">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/register">Register</a>
+                    </li>
+                    </th:block>
+                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/admin">Admin Panel</a>
+                    </li>
+                    </th:block>
+                    <th:block sec:authorize="!isAnonymous()">
+                        <li class="nav-item active">
+                            <a class="nav-link" aria-current="page" href="/logout">Logout</a>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </div>
+    </nav>-->
+    <!-- Navbar -->
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center pt-0 pt-lg-5" style="min-height: 400px">
+            <h4 class="display-4 mb-3 mt-0 mt-lg-5 text-white text-uppercase font-weight-bold">Welcome to FitPoint App</h4>
+            <div class="d-inline-flex">
+                <p class="m-0 text-white"><a class="text-white" href="">Here you can create an appointment for all Fitness centers near you</a></p>
+            </div>
+            <br>
+            <a class="btn btn-outline-light btn-lg" href="/fitness-centers" role="button">See places</a>
+        </div>
+    </div>
+    <br>
+    <!-- Page Header End -->
+    <!-- Background image
+    <div
+            class="p-5 text-center bg-image"
+            style="
+      background-image: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-luxury-gyms-london-1577449934.jpg');
+      height: 400px;
+    "
+    >
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white">
+                    <h1 class="mb-3">Welcome to FitPoint App</h1>
+                    <h4 class="mb-3">Here you can create an appointment for all Fitness centers near you</h4>
+                    <a class="btn btn-outline-light btn-lg" href="/fitness-centers" role="button">See places</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+</header>
+<body>
+<!-- Gym Class Start -->
+<br>
+<div class="container-fluid gym-class mb-5">
+    <div class="row px-3">
+        <div class="col-md-6 p-0">
+            <div class="gym-class-box d-flex flex-column align-items-end justify-content-center bg-primary text-right text-white py-5 px-5">
+                <i class="flaticon-six-pack"></i>
+                <h3 class="display-4 mb-3 text-white font-weight-bold">Body Building</h3>
+                <p>
+                    Lorem justo tempor sit aliquyam invidunt, amet vero ea dolor ipsum ut diam sit dolores, dolor
+                    sit eos sea sanctus erat lorem nonumy sanctus takimata. Kasd amet sit sadipscing at..
+                </p>
+                <a href="" class="btn btn-lg btn-outline-light mt-4 px-4">Join Now</a>
+            </div>
+        </div>
+        <div class="col-md-6 p-0">
+            <div class="gym-class-box d-flex flex-column align-items-start justify-content-center bg-secondary text-left text-white py-5 px-5">
+                <i class="flaticon-bodybuilding"></i>
+                <h3 class="display-4 mb-3 text-white font-weight-bold">Muscle Building</h3>
+                <p>
+                    Lorem justo tempor sit aliquyam invidunt, amet vero ea dolor ipsum ut diam sit dolores, dolor
+                    sit eos sea sanctus erat lorem nonumy sanctus takimata. Kasd amet sit sadipscing at..
+                </p>
+                <a href="" class="btn btn-lg btn-outline-light mt-4 px-4">Join Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gym Class End -->
+
+</body>
+<!--
+<footer class="bg-dark text-center text-white container-fluid">
+     Grid container
+    <div class="container p-4 pb-0">
+        <!-- Section: Social media
+        <section class="mb-4">
+            <!-- Facebook
+            <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+            ><i class="fab fa-facebook-f"></i
+            ></a>
+
+            <!-- Twitter
+            <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+            ><i class="fab fa-twitter"></i
+            ></a>
+
+            <!-- Google
+            <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+            ><i class="fab fa-google"></i
+            ></a>
+
+            <!-- Instagram
+            <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+            ><i class="fab fa-instagram"></i
+            ></a>
+
+            <!-- Linkedin
+            <a class="btn btn-outline-light btn-floating m-1" href="#" role="button"
+            ><i class="fab fa-linkedin-in"></i
+            ></a>
+        </section>
+        <!-- Section: Social media
+    </div>
+    <!-- Grid container
+
+    <!-- Copyright
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyrights All Rights Reserved:
+        <a class="text-white" href="https://nativecreativa.com/">FitPoint.mk</a>
+    </div>
+    <!-- Copyright
+
+</footer>
+-->
+<!-- Footer Start -->
+<div class="footer container-fluid mt-5 py-5 px-sm-3 px-md-5 text-white">
+    <div class="row pt-5">
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="text-primary mb-4">Get In Touch</h4>
+            <p><i class="fa fa-map-marker-alt mr-2"></i>123 Street, New York, USA</p>
+            <p><i class="fa fa-phone-alt mr-2"></i>+012 345 67890</p>
+            <p><i class="fa fa-envelope mr-2"></i>info@example.com</p>
+            <div class="d-flex justify-content-start mt-4">
+                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-twitter"></i></a>
+                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-facebook-f"></i></a>
+                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a class="btn btn-outline-light rounded-circle text-center mr-2 px-0" style="width: 40px; height: 40px;" href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="text-primary mb-4">Quick Links</h4>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Features</a>
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Classes</a>
+                <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="text-primary mb-4">Popular Links</h4>
+            <div class="d-flex flex-column justify-content-start">
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>About Us</a>
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our Features</a>
+                <a class="text-white mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Classes</a>
+                <a class="text-white" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5">
+            <h4 class="text-primary mb-4">Opening Hours</h4>
+            <h5 class="text-white">Monday - Friday</h5>
+            <p>8.00 AM - 8.00 PM</p>
+            <h5 class="text-white">Saturday - Sunday</h5>
+            <p>2.00 PM - 8.00 PM</p>
+        </div>
+    </div>
+    <div class="container border-top border-dark pt-5">
+        <p class="m-0 text-center text-white">
+            &copy; <a class="text-white font-weight-bold" href="#">FitPoint App</a>. All Rights Reserved. Designed by
+            <a class="text-white font-weight-bold" href="https://nativecreativa.com">Native Creativa</a>
+        </p>
+    </div>
+</div>
+<!-- Footer End -->
+
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-outline-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
+
+<!-- Template Javascript -->
+<script src="js/main.js"></script>
+</html>
